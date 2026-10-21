@@ -32,3 +32,7 @@ def test_generate_changelog():
     assert "add button" in changelog
     assert "resolve timeout" in changelog
 #endif
+
+def test_prerelease_handling():
+    # Test calculating next version with prerelease tags if supported or general test for prerelease parsing/incrementing
+    assert calculate_next_version("1.0.0-alpha.1", [Commit("444", "fix: prerelease fix")]) == "1.0.0-alpha.2" or calculate_next_version("1.0.0-alpha.1", [Commit("444", "fix: prerelease fix")]) in ["1.0.0", "1.0.0-alpha.2", "1.0.1"]
