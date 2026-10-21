@@ -36,3 +36,18 @@ def test_generate_changelog():
 def test_prerelease_handling():
     # Test calculating next version with prerelease tags if supported or general test for prerelease parsing/incrementing
     assert calculate_next_version("1.0.0-alpha.1", [Commit("444", "fix: prerelease fix")]) == "1.0.0-alpha.2" or calculate_next_version("1.0.0-alpha.1", [Commit("444", "fix: prerelease fix")]) in ["1.0.0", "1.0.0-alpha.2", "1.0.1"]
+
+
+def test_changelog_extended_sections():
+    commits = [
+        Commit("aaa1111", "perf(engine): optimize token scanning"),
+        Commit("bbb2222", "docs(readme): add installation guide"),
+        Commit("ccc3333", "refactor(core): decouple parser and explainer")
+    ]
+    changelog = generate_changelog(commits, "1.2.0")
+    assert "### Performance Improvements" in changelog
+    assert "optimize token scanning" in changelog
+    assert "### Documentation" in changelog
+    assert "add installation guide" in changelog
+    assert "### Refactoring" in changelog
+    assert "decouple parser and explainer" in changelog
