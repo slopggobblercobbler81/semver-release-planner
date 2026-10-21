@@ -14,3 +14,9 @@ pip install .
 semver-release-planner plan
 semver-release-planner changelog
 ```
+
+## Documentation & API Reference
+
+- `Commit`: Parses git commit messages into structured objects.
+- `calculate_next_version`: Computes the next version string based on commit analysis.
+- `generate_changelog`: Builds markdown changelogs from commit lists.
